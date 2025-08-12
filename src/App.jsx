@@ -5,6 +5,7 @@ import './App.css'
 import ProductCard from './components/productCard.jsx'
 import UserData from './components/UserData.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import LoginPage from './pages/loginPage.jsx'
 
 
 function App() {
@@ -17,9 +18,8 @@ function App() {
 
       <BrowserRouter>
         <Routes path="/*">
-
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/*" element={<h1>404 Not Found</h1>} />
-          <Route path="/login" element={<h1>login</h1>} />
         </Routes>
       </BrowserRouter>
 
