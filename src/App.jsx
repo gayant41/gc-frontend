@@ -19,6 +19,7 @@ function App() {
         <Routes path="/*">
 
           <Route path="/*" element={<h1>404 Not Found</h1>} />
+          <Route path="/login" element={<h1>login</h1>} />
         </Routes>
       </BrowserRouter>
 
