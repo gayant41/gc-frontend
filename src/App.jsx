@@ -6,6 +6,7 @@ import ProductCard from './components/productCard.jsx'
 import UserData from './components/UserData.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoginPage from './pages/loginPage.jsx'
+import AdminHomePage from './pages/adminHomePage.jsx'
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Routes path="/*">
           <Route path="/login" element={<LoginPage />} />
           <Route path="/*" element={<h1>404 Not Found</h1>} />
+          <Route path="/admin/*" element={<AdminHomePage />} />
         </Routes>
       </BrowserRouter>
 
