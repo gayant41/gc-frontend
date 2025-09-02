@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from "react-router-dom";
 import { FaTachometerAlt, FaUsers, FaBoxOpen, FaShoppingCart } from "react-icons/fa"; // Dashboard, Users, Products, Orders
 import AdminProductPage from "./admin/adminProductPage.jsx";
+import AddProductForm from "./admin/addProductForm.jsx";
 
 export default function AdminHomePage() {
     return (
@@ -42,6 +43,7 @@ export default function AdminHomePage() {
                     <Route path="/dashboard" element={<h5>dashboard</h5>} />
                     <Route path="/users" element={<h5>users</h5>} />
                     <Route path="/products" element={<AdminProductPage />} />
+                    <Route path="/products/addproduct" element={<AddProductForm />} />
                     <Route path="/orders" element={<h5>orders</h5>} />
 
 

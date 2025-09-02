@@ -1,6 +1,41 @@
+import axios from "axios"
+import { useState } from "react"
+import toast from "react-hot-toast"
+
 export default function LoginPage() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    function login() {
+        axios.post('http://localhost:3000/api/users/login', {
+            email: email,
+            password: password
+        }).then((res) => {
+            console.log(res)
+            if (res.data.user == null) {
+                toast.error(res.data.message)
+                return
+            }
+            toast.success("Login Success")
+            localStorage.setItem('token', res.data.token)
+            if (res.data.user.type == 'admin') {
+
+                window.location.href = '/admin/dashboard'
+
+            } else {
+                window.location.href = '/'
+            }
+
+        })
+        console.log(email, password)
+    }
+
+
+
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500">
+
+
+        < div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500" >
             <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md">
                 <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
                     Welcome Back 👋
@@ -18,8 +53,8 @@ export default function LoginPage() {
                         <input
                             type="email"
                             id="email"
-                            placeholder="you@example.com"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                            placeholder="Enter your email address"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none" defaultValue={email} onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
 
@@ -32,7 +67,10 @@ export default function LoginPage() {
                             type="password"
                             id="password"
                             placeholder="••••••••"
-                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none"
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-400 outline-none" defaultValue={password} onChange={(e) =>
+                                setPassword(e.target.value)
+
+                            }
                         />
                     </div>
 
@@ -50,7 +88,10 @@ export default function LoginPage() {
                     {/* Submit Button */}
                     <button
                         type="submit"
-                        className="w-full bg-indigo-500 hover:bg-indigo-600 text-white py-2 rounded-lg font-semibold transition duration-300"
+                        className="w-full bg-indigo-500 hover:bg-indigo-600 text-white py-2 rounded-lg font-semibold transition duration-300" onClick={(e) => {
+                            e.preventDefault();
+                            login();
+                        }}
                     >
                         Login
                     </button>
@@ -64,6 +105,6 @@ export default function LoginPage() {
                     </a>
                 </p>
             </div>
-        </div>
+        </div >
     );
 }
