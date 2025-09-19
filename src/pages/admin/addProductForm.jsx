@@ -2,13 +2,16 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import uploadMediaToSupabase from "../../utils/mediaUpload";
 
 export default function AddProductForm() {
+
 
     const [productId, setProductId] = useState('');
     const [productName, setProductName] = useState('');
     const [alternativeName, setAlternativeName] = useState('');
     const [imageUrls, setImageUrls] = useState('');
+    const [imageFiles, setImageFiles] = useState([]);
     const [price, setPrice] = useState('');
     const [lastPrice, setLastPrice] = useState('');
     const [stock, setStock] = useState('');
@@ -18,15 +21,28 @@ export default function AddProductForm() {
     async function handlesubmit(e) {
         e.preventDefault();
         const altName = alternativeName.split(",")
-        const imgUrl = imageUrls.split(",")
+
         console.log(productId, productName, alternativeName, imageUrls, price, lastPrice, stock, description)
+
+        const promisesArray = []
+        for (let i = 0; i < imageFiles.length; i++) {
+            promisesArray[i] = uploadMediaToSupabase(imageFiles[i])
+        }
+
+        const imgUrls = await Promise.all(promisesArray).then((values) => {
+            console.log(values)
+        }).catch((err) => {
+            console.log(err)
+        })
+
+
 
 
         const product = {
             productId: productId,
             productName: productName,
             altName: altName,
-            image: imgUrl,
+            image: imgUrls,
             price: price,
             lastPrice: lastPrice,
             stock: stock,
@@ -92,13 +108,12 @@ export default function AddProductForm() {
 
                 {/* Image URL */}
                 <div className="flex flex-col">
-                    <label className="mb-1 font-medium">Image URL</label>
+                    <label className="mb-1 font-medium">Image </label>
                     <input
-                        type="text"
+                        type="file"
                         className="border rounded-lg px-3 py-2 focus:ring focus:ring-blue-300"
-                        placeholder="https://example.com/product.jpg"
-                        value={imageUrls}
-                        onChange={(e) => setImageUrls(e.target.value)}
+                        onChange={(e) => setImageFiles(e.target.files)}
+                        multiple
                     />
                 </div>
 

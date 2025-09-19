@@ -1,0 +1,9 @@
+API Key
+
+anon public
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFqbG56aGVvb2Nhb3d5ZmdkYWJ0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTcwNzI2MjIsImV4cCI6MjA3MjY0ODYyMn0.C3d3oQq-5a9P2lc9x1XsXLMOJfp1RyZ9FzvRYN06nzg
+
+
+Project URL
+https://qjlnzheoocaowyfgdabt.supabase.co
