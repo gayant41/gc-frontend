@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Header from "../components/header.jsx";
+import ProductOverview from "./home/productOverview.jsx";
+
+
 
 export default function HomePage() {
     return (
@@ -7,11 +10,15 @@ export default function HomePage() {
         <div className="bg-[#FCF9EA] w-full h-screen">
             <Header />
 
-            {/* <Routes path="/*">
+            < div className="w-full h-[calc(100vh-80px)]">
+                <Routes  >
 
+                    <Route path="/" element={<h1>Home Page</h1>} />
 
-            </Routes> */}
+                    <Route path="productInfo/:id" element={<ProductOverview />} />
 
+                </Routes>
+            </div>
         </div>
     )
 }

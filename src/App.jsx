@@ -22,9 +22,9 @@ function App() {
       <BrowserRouter>
         <Toaster />
         <Routes path="/*">
-          <Route path="/" element={<HomePage />} />
+          <Route path="/*" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/*" element={<h1>404 Not Found</h1>} />
+
           <Route path="/admin/*" element={<AdminHomePage />} />
         </Routes>
       </BrowserRouter>

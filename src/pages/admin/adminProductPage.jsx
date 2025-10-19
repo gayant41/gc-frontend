@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminProductPage() {
     const [products, setProduct] = useState([]);
@@ -21,6 +21,10 @@ export default function AdminProductPage() {
         }
     }, [productsLoaded]);
 
+    const navigate = useNavigate();
+
+
+
     return (
         <div className="p-6 relative">
             <Link to="/admin/products/addproduct" className="absolute bottom-0 right-4 rounded-full bg-teal-500 px-2 py-2 text-white hover:bg-teal-600 " ><FaPlus size={20} /></Link>
@@ -31,6 +35,7 @@ export default function AdminProductPage() {
                         <tr>
                             <th className="px-4 py-3">Product ID</th>
                             <th className="px-4 py-3">Product Name</th>
+                            <th className="px-4 py-3">Alternative Name</th>
                             <th className="px-4 py-3">Price</th>
                             <th className="px-4 py-3">Last Price</th>
                             <th className="px-4 py-3">Stock</th>
@@ -49,6 +54,7 @@ export default function AdminProductPage() {
                                     <td className="px-4 py-3 font-medium text-gray-900">
                                         {product.productName}
                                     </td>
+                                    <td className="px-4 py-3">{product.altName.join(", ")}</td>
                                     <td className="px-4 py-3 text-green-600 font-semibold">
                                         Rs. {product.price}
                                     </td>
@@ -76,7 +82,9 @@ export default function AdminProductPage() {
                                         }}>
                                             <FaTrash />
                                         </button>
-                                        <button className="text-blue-500 hover:text-blue-700">
+                                        <button className="text-blue-500 hover:text-blue-700" onClick={() => {
+                                            navigate(`/admin/products/editproduct`, { state: { product: product } })
+                                        }}>
                                             <FaPencil />
                                         </button>
                                     </td>
@@ -95,6 +103,6 @@ export default function AdminProductPage() {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div >
     );
 }
